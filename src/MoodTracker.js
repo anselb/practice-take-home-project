@@ -25,20 +25,20 @@ class MoodTracker extends Component {
 
   saveWeather(event) {
     event.preventDefault();
-    
+
     const location = this.props.weather.name;
     const temp = `${this.props.weather.main.temp}˚F`;
     const description = this.props.weather.weather[0].description;
 
     const weatherData = { location, temp, description };
-    this.setState({ weather: weatherData }, this.saveDate());
+    this.setState({ weather: weatherData }, this.saveDate);
   }
 
   saveDate() {
     const today = new Date();
     const todayDate = today.toLocaleDateString();
 
-    this.setState({ date: todayDate }, this.saveMood());
+    this.setState({ date: todayDate }, this.saveMood);
   }
 
   saveMood() {
