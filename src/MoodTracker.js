@@ -25,7 +25,9 @@ class MoodTracker extends Component {
 
     const today = new Date();
     const todayDate = today.toLocaleDateString();
+
     this.setState({ date: todayDate }, () => {
+
       if (!localStorage.getItem('moodArray')) {
         const moodArray = JSON.stringify([this.state])
         localStorage.setItem('moodArray', moodArray);
@@ -36,8 +38,8 @@ class MoodTracker extends Component {
         moodArray = JSON.stringify(moodArray);
         localStorage.setItem('moodArray', moodArray);
       }
-
       this.setState({ mood: "" });
+
     });
   }
 

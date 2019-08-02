@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 
 import Weather from './Weather';
 import MoodTracker from './MoodTracker';
 
-function App() {
-  return (
-    <div className="App">
-      <Weather />
-      <MoodTracker />
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Weather />
+        <MoodTracker />
+      </div>
+    );
+  }
 }
 
 export default App;
