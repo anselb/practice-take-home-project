@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <div className="App">
         <Weather setWeather={this.setWeather} />
-        <MoodTracker />
+        <MoodTracker weather={this.state.weather} />
       </div>
     );
   }

@@ -5,6 +5,8 @@ function Mood(props) {
     <div>
       <p>Mood: {props.moodInfo.mood}</p>
       <p>Date of Mood: {props.moodInfo.date}</p>
+      <p>Temperature on Day: {props.moodInfo.weather.temp}</p>
+      <p>Weather on Day: {props.moodInfo.weather.description}</p>
     </div>
   );
 }
