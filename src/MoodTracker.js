@@ -82,6 +82,7 @@ class MoodTracker extends Component {
               name="mood"
               value={this.state.mood}
               onChange={this.getMood}
+              style={{ margin: "5px" }}
             />
           </label>
           <input type="submit" value="Save" />
