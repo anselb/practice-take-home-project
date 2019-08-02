@@ -5,16 +5,27 @@ class MoodTracker extends Component {
     super(props)
 
     this.state = {
-      mood: null
+      mood: ''
     }
+
+    this.getMood = this.getMood.bind(this);
+  }
+
+  getMood(event) {
+    this.setState({ mood: event.target.value });
   }
 
   render() {
     return (
       <form>
         <label>
-          Mood: 
-          <input type="text" name="mood" />
+          Mood:
+          <input
+            type="text"
+            name="mood"
+            value={this.state.mood}
+            onChange={this.getMood}
+          />
         </label>
         <input type="submit" value="Submit" />
       </form>
