@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Mood from './Mood';
+
 class MoodTracker extends Component {
   constructor(props) {
     super(props)
@@ -10,6 +12,7 @@ class MoodTracker extends Component {
 
     this.getMood = this.getMood.bind(this);
     this.saveMood = this.saveMood.bind(this);
+    this.renderMoods = this.renderMoods.bind(this);
   }
 
   getMood(event) {
@@ -20,12 +23,12 @@ class MoodTracker extends Component {
     event.preventDefault();
 
     if (!localStorage.getItem('moodArray')) {
-      const moodArray = JSON.stringify([this.state.mood])
+      const moodArray = JSON.stringify([this.state])
       localStorage.setItem('moodArray', moodArray);
     } else {
       let moodArray = localStorage.getItem('moodArray');
       moodArray = JSON.parse(moodArray);
-      moodArray.push(this.state.mood);
+      moodArray.push(this.state);
       moodArray = JSON.stringify(moodArray);
       localStorage.setItem('moodArray', moodArray);
     }
@@ -33,20 +36,41 @@ class MoodTracker extends Component {
     this.setState({ mood: "" });
   }
 
+  renderMoods() {
+    let moodArray = localStorage.getItem('moodArray');
+    let moodComponents = []
+
+    if (moodArray) {
+      moodArray = JSON.parse(moodArray);
+
+      for (let i = 0; i < moodArray.length; i += 1) {
+        moodComponents.push(<Mood moodInfo={moodArray[i]} key={i} />)
+      }
+    }
+
+    return moodComponents
+  }
+
   render() {
     return (
-      <form onSubmit={this.saveMood}>
-        <label>
-          Mood:
-          <input
-            type="text"
-            name="mood"
-            value={this.state.mood}
-            onChange={this.getMood}
-          />
-        </label>
-        <input type="submit" value="Save" />
-      </form>
+      <div>
+        <form onSubmit={this.saveMood}>
+          <label>
+            Mood:
+            <input
+              type="text"
+              name="mood"
+              value={this.state.mood}
+              onChange={this.getMood}
+            />
+          </label>
+          <input type="submit" value="Save" />
+        </form>
+
+        <div>
+          {this.renderMoods()}
+        </div>
+      </div>
     )
   }
 }
