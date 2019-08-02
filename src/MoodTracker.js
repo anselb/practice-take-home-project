@@ -7,7 +7,8 @@ class MoodTracker extends Component {
     super(props)
 
     this.state = {
-      mood: ''
+      mood: '',
+      date: ''
     }
 
     this.getMood = this.getMood.bind(this);
@@ -22,18 +23,22 @@ class MoodTracker extends Component {
   saveMood(event) {
     event.preventDefault();
 
-    if (!localStorage.getItem('moodArray')) {
-      const moodArray = JSON.stringify([this.state])
-      localStorage.setItem('moodArray', moodArray);
-    } else {
-      let moodArray = localStorage.getItem('moodArray');
-      moodArray = JSON.parse(moodArray);
-      moodArray.push(this.state);
-      moodArray = JSON.stringify(moodArray);
-      localStorage.setItem('moodArray', moodArray);
-    }
+    const today = new Date();
+    const todayDate = today.toLocaleDateString();
+    this.setState({ date: todayDate }, () => {
+      if (!localStorage.getItem('moodArray')) {
+        const moodArray = JSON.stringify([this.state])
+        localStorage.setItem('moodArray', moodArray);
+      } else {
+        let moodArray = localStorage.getItem('moodArray');
+        moodArray = JSON.parse(moodArray);
+        moodArray.push(this.state);
+        moodArray = JSON.stringify(moodArray);
+        localStorage.setItem('moodArray', moodArray);
+      }
 
-    this.setState({ mood: "" });
+      this.setState({ mood: "" });
+    });
   }
 
   renderMoods() {
