@@ -18,7 +18,10 @@ class Weather extends Component {
 
     fetch(url)
       .then(res => res.json())
-      .then(json => this.setState({ weather: json }))
+      .then(json => {
+        this.setState({ weather: json })
+        this.props.setWeather(json)
+      })
       .catch(err => console.log(err.message))
 
   }
